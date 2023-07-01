@@ -40,13 +40,12 @@ const heading3 = (
 const Title = () => (
  <h1 id="heading" key="h3">Hellow</h1>
 )
-const data = api.getData(); // JSX prevent hacking (sanitizes js injection by hackers)
+// const data = api.getData(); // JSX prevent hacking (sanitizes js injection by hackers)
 const HeaderComponent = () => { // normal js function, composing components
   return (
     <div>
      <Title/> 
      {1+2}
-     {data}
      {heading3}
       <h1>Hellow everynyan</h1>
     </div>
