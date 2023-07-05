@@ -130,16 +130,15 @@ const restaurantList = [{
 // };
 
 // destructuring the object method to remove props.restaurant
-const RestaurantCard = ({restaurant}) => {
+const RestaurantCard = ({name, cuisines, image, rating}) => {
   // console.log(props); 
 
   // now destructuring the restaurant also to remove .data .name
-  const {name, cuisines, image, rating} = restaurant;
   return (
     <div className="card">
       <img src={image} alt="Food court"/>
       <h2>{name}</h2>
-      <h3>{cuisines.join(",")}</h3>
+      <h3>{cuisines}</h3>
       <h4>{rating} stars</h4>
     </div> 
   );
@@ -153,10 +152,13 @@ const RestaurantCard = ({restaurant}) => {
 const Body = () => {
   return (
     <div className="r-list">
-      <RestaurantCard restaurant={...restaurantList[0]}/>
-      <RestaurantCard restaurant={...restaurantList[1]}/>  
-      <RestaurantCard restaurant={...restaurantList[2]}/>
-      <RestaurantCard restaurant={...restaurantList[3]}/>            
+      {
+        //why map if preferred over foreach
+        // mapping instead of calling list index again and again
+        restaurantList.map((restaurant) => {
+          return <RestaurantCard {...restaurant}/>;
+        })}
+           
     </div>
   );
 };
