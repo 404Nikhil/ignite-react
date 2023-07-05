@@ -58,45 +58,108 @@ const Header = () => {
     </div>
   );
 };
+//  CONFIG DRIVEN UI
 
-const burgerKing = {
+// const config = [
+//   {
+//     type: "caraousel",
+//     cards: [
+//       {
+//         offerName: "50% off"
+//       },
+//       {
+//         offerName: "No delivery charges"
+//       }
+//     ]
+//   },
+//   {
+//     type: "restaurants",
+//     cards: [
+//       {
+//         name: "Burger King",
+//         image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
+//         cuisines: ["Burger", "Chicken"],
+//         rating: "4.2"
+//       },
+//       {
+//         name: "KFC",
+//         image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
+//         cuisines: ["Burger", "Chicken"],
+//         rating: "4.2"
+//       }
+//     ]
+//   }
+// ]
+
+const restaurantList = [{
   name: "Burger King",
   image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
   cuisines: ["Burger", "Chicken"],
   rating: "4.2"
-}
+},
+{
+  name: "KFC",
+  image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
+  cuisines: ["Burger", "Chicken"],
+  rating: "4.3"
+},
+{
+  name: "Food court",
+  image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
+  cuisines: ["Burger", "Chicken"],
+  rating: "2"
+},
+{
+  name: "Ieecream corner",
+  image: "https://mgmgrand.mgmresorts.com/content/dam/MGM/mgm-grand/dining/food-court/architecture/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg",
+  cuisines: ["ice", "cream"],
+  rating: "3"
+}];
 //Config Driven UI(All the UI is run by config which is sent by backend)
-const RestaurantCard = () => {
+// if passing thru props only
+// const RestaurantCard = (props) => {
+//   console.log(props); 
+//   return (
+//     <div className="card">
+//       <img src={props.restaurant?.image} alt="Food court"/>
+//       <h2>{props.restaurant?.name}</h2>
+//       <h3>{props.restaurant?.cuisines.join(",")}</h3>
+//       <h4>{props.restaurant?.rating} stars</h4>
+//     </div> 
+//   );
+// };
+
+// destructuring the object method to remove props.restaurant
+const RestaurantCard = ({restaurant}) => {
+  // console.log(props); 
+
+  // now destructuring the restaurant also to remove .data .name
+  const {name, cuisines, image, rating} = restaurant;
   return (
     <div className="card">
-      <img src={burgerKing.image} alt="Food court"/>
-      <h2>{burgerKing.name}</h2>
-      <h3>{burgerKing.cuisines.join(",")}</h3>
-      <h4>{burgerKing.rating} stars</h4>
-    </div>
-  )
-}
+      <img src={image} alt="Food court"/>
+      <h2>{name}</h2>
+      <h3>{cuisines.join(",")}</h3>
+      <h4>{rating} stars</h4>
+    </div> 
+  );
+};
 
+
+//to modify data we have to use props - properties(passing data into my components)
+// how to pass data in function using params and arguments
+// function fn(params, param2){ } fn("args1", args2) you pass a argument
+/* <RestaurantCard restaurant={restaurantList[0]} /> */
 const Body = () => {
   return (
-    <div class="r-list">
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      <RestaurantCard/>
-      
+    <div className="r-list">
+      <RestaurantCard restaurant={...restaurantList[0]}/>
+      <RestaurantCard restaurant={...restaurantList[1]}/>  
+      <RestaurantCard restaurant={...restaurantList[2]}/>
+      <RestaurantCard restaurant={...restaurantList[3]}/>            
     </div>
-  )
-}
+  );
+};
 // <React.Fragment> = <>
 // React.Fragment is a component which is exported by the react, It is like an empty tag.
 const Footer = () => {
